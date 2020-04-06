@@ -44,6 +44,7 @@ class App extends Component {
   }
 
   calculateFaceLocation = (data, i) => {
+    console.log(data);
     const clarifaiFaceBox =
       data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById("inputImage");
@@ -67,7 +68,7 @@ class App extends Component {
 
   onSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:3000/imageurl", {
+    fetch("https://dreywesson.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -77,7 +78,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((res) => {
         if (res) {
-          fetch("http://localhost:3000/image", {
+          fetch("https://dreywesson.herokuapp.com:3000/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
